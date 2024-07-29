@@ -3,6 +3,8 @@ Project keywords: Java, Lynx clone, webbrowser clone, WebView
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
 
+![BrowserApp.png](..%2F..%2F..%2FUsers%2FOmistaja%2FDesktop%2FBrowserApp.png)
+
 MAIN FEATURES
 
 WebView Browser
@@ -15,13 +17,15 @@ The end result is the display of the user's desired website in the program's use
 Lynx clone browser
 
 The Lynx browser displays web pages in text mode only. If the user wants to see only the text of web pages, this feature can be enabled
-by clicking the "Switch to text mode" checkbox in the user interface. By clicking the check box, the program hides the webView element
-using the SetOpacity method and displays the  text area element using the same method. The text fetched from the url is displayed in the text area element.
+by clicking the "Switch to text mode" checkbox in the user interface. The  Checkbox works dynamically. One click hides the webView element
+and shows the text area. a second click does the opposite.
+By clicking the checkbox, the program hides the webView element using the SetOpacity method and displays the 
+text area element using the same method. The text fetched from the url is displayed in the text area element.
 
 Searching for plain text from the url entered by the user is done with the ExcecuteScript method of the WenView class, 
-which takes the expression "document.documentElement.innerText" as a value. The  Checkbox works dynamically. 
-One click hides the webView element and shows the text area. a second click does the opposite.
-
+which takes the expression "document.documentElement.innerText" as a value. The text content of the page can also be 
+saved in a text file. The save method contains a dialog where the user can select a folder/location to save the file.
+This feature is implemented in the FileChooser and FileWriter classes.
 
 
 THEMES
@@ -34,6 +38,7 @@ Since the stored value is small, I decided to use a text file instead of a datab
 Theme values ​​are stored in the settings.txt file. First, the program checks if the configuration file already exists, 
 if not, the program creates it and if it exists, replaces the theme with the new value.
 These properties are done using the File class and the FileWriter class.
+Style changes are implemented with the setStyle method.
 
 
 ZOOM
