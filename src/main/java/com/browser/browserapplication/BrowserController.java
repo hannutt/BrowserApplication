@@ -66,15 +66,7 @@ public class BrowserController {
         //jos tiedosto sisältää allaolevan lauseen, lähetetään se setsavedstyles metodille
         //savedstyle metodi muuttaa ohjelman taustavärin parametrina saamansa värikoodin mukaisesksi.
         while((line = br.readLine()) != null){
-            if (line.contains("-fx-background-color: #4c4c4c;"))
-            {
-                themes.setSavedStyle(Vb,line);
-
-            }
-            //muussa tapauksessa savedstyle saa vaalen taustavärin värikoodin
-            else {
-                themes.setSavedStyle(Vb,"-fx-background-color: #f7f9f9");
-            }
+            themes.setSavedStyle(Vb,line);
 
             }
 

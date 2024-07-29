@@ -3,7 +3,7 @@ Project keywords: Java, Lynx clone, webbrowser clone, WebView
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
 
-![BrowserApp.png](..%2F..%2F..%2FUsers%2FOmistaja%2FDesktop%2FBrowserApp.png)
+
 
 MAIN FEATURES
 
@@ -27,12 +27,19 @@ which takes the expression "document.documentElement.innerText" as a value. The 
 saved in a text file. The save method contains a dialog where the user can select a folder/location to save the file.
 This feature is implemented in the FileChooser and FileWriter classes.
 
+SET THE HOMEPAGE
+
+Like modern browsers, you can set your favorite page as the home page that appears every time you open the program.
+The program's user interface has a set home page check box.
+by clicking the check box, the program executes a method that first checks if the favorite home page is already stored
+in the sql database used by the program, if found, an SQL update query is executed. If not, the SQL insert query is executed.
 
 THEMES
 
-The program includes two ready-made themes, light and dark, which can be used to change the appearance of the browser. 
-In addition, the user can enter the desired color code in the input field and the color of the appearance changes according
-to the color code entered by the user. The selected theme is always saved in a text file, so the program remembers the last used theme.
+The program includes two ready-made themes, light and dark, which can be used to change the appearance of the browser.
+In addition, the user can enter the desired color code in the input field as a HEX code and the color of the appearance 
+will change accordingly to the color code provided by the user.
+The selected theme is always saved in a text file, so the program remembers the last used and saved theme.
 Since the stored value is small, I decided to use a text file instead of a database.
 
 Theme values ​​are stored in the settings.txt file. First, the program checks if the configuration file already exists, 
