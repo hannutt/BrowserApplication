@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<VBox fx:id="Vb" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="537.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.browser.browserapplication.BrowserController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="24.0" prefWidth="454.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="pageContent" mnemonicParsing="false" onAction="#getPageContent" text="Save page content" />
+                  <MenuItem fx:id="pageLinks" mnemonicParsing="false" onAction="#getPageLinks" text="Get page links" />
+                  <MenuItem fx:id="txtmode" mnemonicParsing="false" onAction="#openTextMode" text="Show page text only" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Themes">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Color code + enter">
+                     <graphic>
+                        <TextField fx:id="colCode" onKeyPressed="#customTheme" onTouchPressed="#customTheme" />
+                     </graphic>
+                  </MenuItem>
+              <MenuItem fx:id="dark" mnemonicParsing="false" onAction="#setDarkTheme" text="Dark theme" />
+                  <MenuItem fx:id="light" mnemonicParsing="false" onAction="#setLightTheme" text="Light theme" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="350.0" prefWidth="500.0" style="-fx-border-radius: 10px;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="495.0" style="-fx-background-color: black; -fx-border-radius: 20;">
+               <children>
+                  <TextField fx:id="addField" layoutX="44.0" layoutY="14.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" prefHeight="25.0" prefWidth="411.0" />
+                  <Button fx:id="nextBtn" layoutX="466.0" layoutY="15.0" mnemonicParsing="false" onAction="#goNextPage">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/nextArrow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="preBtn" layoutX="-3.0" layoutY="14.0" mnemonicParsing="false" onAction="#goPreviousPage" prefHeight="25.0" prefWidth="23.0">
+                     <graphic>
+                        <ImageView fitHeight="73.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/previousArrow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="zoomMinus" layoutX="465.0" layoutY="50.0" mnemonicParsing="false" onAction="#MinusZoom" prefHeight="27.0" prefWidth="32.0">
+                     <graphic>
+                        <ImageView fx:id="zoomOut" fitHeight="75.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/zoom-out.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="zoomPlus" layoutX="464.0" layoutY="87.0" mnemonicParsing="false" onAction="#PlusZoom">
+                     <graphic>
+                        <ImageView fx:id="zoomIn" fitHeight="82.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/zoom-in.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <CheckBox fx:id="switchTxt" layoutX="14.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchTxt" text="Switch to text mode" textFill="#f5f5f5" />
+                  <WebView fx:id="webView" layoutX="15.0" layoutY="63.0" prefHeight="253.0" prefWidth="442.0" />
+                  <CheckBox fx:id="blankCB" layoutX="401.0" layoutY="316.0" mnemonicParsing="false" onAction="#blankPage" text="Blank page" textFill="WHITE" />
+                  <CheckBox fx:id="startPageCB" layoutX="182.0" layoutY="42.0" mnemonicParsing="false" onAction="#saveStartPage" prefHeight="17.0" prefWidth="118.0" text="Set to start page" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <TextArea fx:id="txtView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="122.0" prefWidth="613.0" />
+   </children>
+</VBox>
