@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
@@ -32,6 +33,8 @@ public class BrowserController {
     BrowserMethods bm = new BrowserMethods();
 
 
+    @FXML
+    public AnchorPane anchorPane;
     @FXML
     public Slider slider;
     @FXML
@@ -60,6 +63,7 @@ public class BrowserController {
 
     public String startPage;
 
+
     WebEngine webEngine = new WebEngine();
     WebHistory history = webEngine.getHistory();
 
@@ -87,19 +91,36 @@ public class BrowserController {
         });
         getSavedStartPage();
         bom.ShowBookmarks(bookmarks, webView);
+        StyleConfiguration();
 
         //webView.getEngine().load("http://google.com");
 
+
+    }
+
+    public void StyleConfiguration() throws IOException {
         //luetaan tiedoston settings.txt sisältö
         String filename = "settings.txt";
         File file = new File(filename);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
-        String line;
+        String Bgcolor;
+        String txtFIll;
+
         //jos tiedosto sisältää allaolevan lauseen, lähetetään se setsavedstyles metodille
         //savedstyle metodi muuttaa ohjelman taustavärin parametrina saamansa värikoodin mukaisesksi.
-        while ((line = br.readLine()) != null) {
-            themes.setSavedStyle(Vb, line);
+        while ((Bgcolor = br.readLine()) != null) {
+            themes.setSavedStyle(anchorPane, Bgcolor);
+            //tässä luetaan tiedoston toinen rivi, eli checkboxin tekstiväri ja lähetetään se metodille
+            //joka muuttaa cb:n tekstin mustaksi
+            txtFIll=br.readLine();
+            if(txtFIll !=null)
+            {
+                themes.setCBtextColor(startPageCB,switchTxt, txtFIll);
+                System.out.println(txtFIll);
+
+            }
+
 
         }
     }
@@ -140,14 +161,14 @@ public class BrowserController {
     }
 
     public void setDarkTheme(ActionEvent actionEvent) throws IOException {
-        themes.useDarkTheme(Vb);
+        themes.useDarkTheme(anchorPane);
 
 
     }
 
     public void setLightTheme(ActionEvent actionEvent) throws IOException {
 
-        themes.useLightTheme(Vb);
+        themes.useLightTheme(anchorPane);
     }
 
     public void goPreviousPage(ActionEvent actionEvent) {
@@ -166,6 +187,11 @@ public class BrowserController {
         if (switchTxt.isSelected()) {
             webView.setOpacity(0.0);
             txtView.setOpacity(1.0);
+            //muutetaan teksilaatikon korkeutta,
+            txtView.setMinHeight(100);
+
+
+
 
         } else {
             webView.setOpacity(1.0);
@@ -176,7 +202,7 @@ public class BrowserController {
 
 
     public void customTheme(KeyEvent keyEvent) throws IOException {
-        themes.setCustomTheme(keyEvent, colCode, Vb);
+        themes.setCustomTheme(keyEvent, colCode,anchorPane);
 
 
     }

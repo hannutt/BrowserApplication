@@ -50,7 +50,7 @@ public class BrowserMethods {
                 address= address.replace("www.","");
             }
 
-            getPageTitle(webView);
+            //getPageTitle(webView);
 
             addreslist.add(address);
             webView.getEngine().load(address);

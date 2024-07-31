@@ -3,6 +3,8 @@ Project keywords: Java, Lynx clone, webbrowser clone, WebView,MySQL
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
 
+![UI.png](UI.png)
+
 
 
 MAIN FEATURES

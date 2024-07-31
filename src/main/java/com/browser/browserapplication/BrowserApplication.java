@@ -17,8 +17,7 @@ import java.io.IOException;
 
 public class BrowserApplication extends Application {
 
-    @FXML
-    public  VBox Vb;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BrowserApplication.class.getResource("browser-view.fxml"));

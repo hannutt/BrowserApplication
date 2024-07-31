@@ -1,1 +1,2 @@
--fx-background-color: #4c4c4c;
+-fx-background-color: #c4dada;
+-fx-text-fill:black
