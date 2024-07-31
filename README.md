@@ -67,6 +67,13 @@ On each click, the SetZoom method receives a decimal value of 1.0 as a parameter
 the Zoom In or Zoom Out button, the value returned as a parameter is either increased or decreased from its current zoom value.
 The current zoom value is obtained with the getZoom method.
 
+CHANGE THE FONT SCALE
+
+the font size can be changed using the slider. drag the slider up to increase the font size and drag the slider down to 
+decrease the font size. The slider component uses the changeListener interface to determine the current value of the slider.
+The font scale can be reset to the default value by clicking the reset button. when you click the reset button, the button
+method sends a value of 0.0 to the slider.setValue method and a value of 1.0 to the webView.setScale method.
+
 GO PREVIOUS OR NEXT PAGE
 
 All URLs that the user types in the address field are stored in a list of strings. When the user wants to go to the previous page, 

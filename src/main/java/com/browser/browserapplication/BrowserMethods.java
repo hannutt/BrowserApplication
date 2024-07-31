@@ -20,9 +20,10 @@ import java.util.List;
 public class BrowserMethods {
     WebEngine webEngine = new WebEngine();
 
+    public  int listI;
     public boolean BannedSite=false;
 
-    public void startBrowsing(List<String> addreslist, TextField addField, CheckBox switchTxt, int listIndex, TextArea txtView, WebView webView) {
+    public void startBrowsing(List<String> addreslist, TextField addField, CheckBox switchTxt, TextArea txtView, WebView webView) {
         String address = "http://www."+addField.getText();
 
         if (switchTxt.isSelected())
@@ -39,7 +40,7 @@ public class BrowserMethods {
 
             txtView.appendText(pageText);
             addreslist.add(address);
-            listIndex = listIndex +1;
+            listI = listI +1;
         }
 
         else if (!switchTxt.isSelected())
@@ -53,17 +54,27 @@ public class BrowserMethods {
 
             addreslist.add(address);
             webView.getEngine().load(address);
+            listI+=1;
 
 
 
             System.out.println(addreslist);
 
-            listIndex = listIndex +1;
+
 
         }
+    }
+    public void executePrevious(List<String> addreslist, WebView webView) {
+        listI-=1;
+        System.out.println(listI);
 
+        webView.getEngine().load(addreslist.get(listI));
+    }
 
-
+    public void executeNext(WebView webView, List<String> addreslist) {
+        listI+=1;
+        System.out.println(listI);
+        webView.getEngine().load(addreslist.get(listI));
     }
 
     public void getPageTitle(WebView webView) {

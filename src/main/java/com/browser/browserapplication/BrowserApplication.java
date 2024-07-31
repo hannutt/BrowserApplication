@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
+
 public class BrowserApplication extends Application {
 
     @FXML

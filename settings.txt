@@ -1,1 +1,1 @@
--fx-background-color:#1ef3f3 ;
+-fx-background-color: #4c4c4c;
