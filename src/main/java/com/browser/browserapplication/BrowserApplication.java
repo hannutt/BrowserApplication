@@ -16,9 +16,6 @@ import java.io.IOException;
 
 public class BrowserApplication extends Application {
 
-
-
-    BrowserController bc = new BrowserController();
     @FXML
     public  VBox Vb;
     @Override

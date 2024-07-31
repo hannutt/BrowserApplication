@@ -1,4 +1,4 @@
-Project keywords: Java, Lynx clone, webbrowser clone, WebView
+Project keywords: Java, Lynx clone, webbrowser clone, WebView,MySQL
 
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
@@ -26,6 +26,17 @@ Searching for plain text from the url entered by the user is done with the Excec
 which takes the expression "document.documentElement.innerText" as a value. The text content of the page can also be 
 saved in a text file. The save method contains a dialog where the user can select a folder/location to save the file.
 This feature is implemented in the FileChooser and FileWriter classes.
+
+BOOKMARKS
+
+Bookmarks can be saved by clicking the Save Bookmark button. The button's method retrieves the typed address 
+from the address field and stores it in the SQL database.
+
+Saved bookmarks appear in the Bookmarks menu. Clicking on the bookmark menu executes a method that creates a 
+menuitem item for each saved bookmark stored in the program's sql database.
+In each menu item, you can access the url address of the menu item by clicking on the desired address. 
+Each menu item has an event handler that grabs the URL of the clicked menu item and sends it to the WebView object.
+Then the webView object performs the loading method, i.e. displays the page of the clicked bookmark.
 
 SET THE HOMEPAGE
 

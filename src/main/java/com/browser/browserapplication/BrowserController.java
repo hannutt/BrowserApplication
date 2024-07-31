@@ -3,13 +3,12 @@ package com.browser.browserapplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,7 +22,11 @@ public class BrowserController {
 
     Zoom zoom = new Zoom();
 
+    BrowserMethods bm = new BrowserMethods();
 
+
+    @FXML
+    public MenuButton mb;
     @FXML
     public WebView webView;
 
@@ -32,6 +35,9 @@ public class BrowserController {
 
     @FXML
     public Stage stage;
+
+    @FXML
+    public Menu bookmarks;
 
     @FXML
     public VBox Vb;
@@ -47,13 +53,19 @@ public class BrowserController {
 
     public String startPage;
 
+    WebEngine webEngine = new WebEngine();
+    WebHistory history = webEngine.getHistory();
+
+    Bookmarks bom = new Bookmarks();
 
 
     Themes themes = new Themes();
     List<String> addreslist=new ArrayList<String>();
 
+
     public void initialize() throws IOException, SQLException {
         getSavedStartPage();
+        bom.ShowBookmarks(bookmarks,webView);
 
         //webView.getEngine().load("http://google.com");
 
@@ -69,61 +81,14 @@ public class BrowserController {
             themes.setSavedStyle(Vb,line);
 
             }
-
-
-
     }
 
     public void goPage(ActionEvent actionEvent) {
-
-        String address = "http://www."+addField.getText();
-
-         if (switchTxt.isSelected())
-        {
-            if (address.contains("www."))
-            {
-                address= address.replace("www.","");
-            }
-            txtView.clear();
-            webView.getEngine().load(address);
-            String pageText = (String) webView.getEngine().executeScript("document.documentElement.innerText");
-            txtView.appendText(pageText);
-            addreslist.add(address);
-            listIndex = listIndex +1;
-        }
-
-       else if (!switchTxt.isSelected())
-       {
-           if (address.contains("www."))
-           {
-               address= address.replace("www.","");
-           }
-           addreslist.add(address);
-           webView.getEngine().load(address);
-           System.out.println(addreslist);
-           listIndex = listIndex +1;
-
-       }
-
+        bm.startBrowsing(addreslist,addField,switchTxt,listIndex,txtView,webView);
 
     }
-
-
-
     public void getPageContent(ActionEvent actionEvent) throws IOException {
-        //näytetään sivun teksti (innerhtml)
-        String pageText = (String) webView.getEngine().executeScript("document.documentElement.innerText");
-        FileChooser fileChooser = new FileChooser();
-        //stage on pääikkuna eli hello-view.fxml
-        //tähän talletetaan tiedoston polku ja sille syötetty nimi
-        File selectedFile= fileChooser.showSaveDialog(stage);
-
-        FileWriter writer = new FileWriter(selectedFile);
-        //writerille kerrotaan, mitä kirjoitetaan, eli tässä tapauksessa
-        //muuttujan sisältö
-        writer.write(pageText);
-        System.out.println(pageText);
-        writer.close();
+       bm.ScrapeContent(webView,stage);
     }
 
     public void getPageLinks(ActionEvent actionEvent) {
@@ -162,7 +127,8 @@ public class BrowserController {
       themes.useLightTheme(Vb);
     }
     public void goPreviousPage(ActionEvent actionEvent) {
-        listIndex -=1;
+        listIndex=listIndex-1;
+
         webView.getEngine().load(addreslist.get(listIndex));
 
     }
@@ -203,25 +169,17 @@ public class BrowserController {
     }
 
 
-
-
     public void customTheme(KeyEvent keyEvent) throws IOException {
         themes.setCustomTheme(keyEvent,colCode,Vb);
 
 
     }
 
-    public void blankPage(ActionEvent actionEvent) {
-        if (blankCB.isSelected())
-        {
-            webView.getEngine().load("about:blank");
-        }
-    }
 
     public void saveStartPage(ActionEvent actionEvent) throws SQLException {
         if (startPageCB.isSelected())
         {
-            //startPage=addField.getText();
+            startPage=addField.getText();
             String DBquery;
             DBconnection conn = new DBconnection();
             Connection connDB = conn.getConnection();
@@ -229,13 +187,17 @@ public class BrowserController {
             ResultSet rs = stmt.executeQuery("SELECT url FROM pages WHERE id=1");
             //tarkistus löytyykö id 1:llä kannasta talletettua tietoa
             if (rs.next()){
-                DBquery = "UPDATE pages SET url (?) WHERE id=1";
+                DBquery = "UPDATE pages SET url = (?) WHERE id=1";
+                PreparedStatement pst = connDB.prepareStatement(DBquery);
+                pst.setString(1,startPage);
+                pst.executeUpdate();
             }
-            /*
-            String DBquery = "INSERT INTO pages (url) VALUES (?)";
-            PreparedStatement pst = connDB.prepareStatement(DBquery);
-            pst.setString(1,startPage);
-            pst.executeUpdate();*/
+            else {
+                DBquery = "INSERT INTO pages (url) VALUES (?)";
+                PreparedStatement pst = connDB.prepareStatement(DBquery);
+                pst.setString(1,startPage);
+                pst.executeUpdate();
+            }
 
         }
 
@@ -265,6 +227,12 @@ public class BrowserController {
        }
     }
 
+
+    public void saveBookmark(ActionEvent actionEvent) throws SQLException {
+
+        bom.executeSave(addField);
+
+    }
 }
 
 
