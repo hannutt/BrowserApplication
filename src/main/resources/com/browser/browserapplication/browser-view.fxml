@@ -108,6 +108,7 @@
                      </graphic>
                   </Button>
                   <TextArea fx:id="txtView" layoutX="105.0" layoutY="91.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="327.0" />
+                  <Button fx:id="debugBtn" layoutX="432.0" layoutY="64.0" mnemonicParsing="false" onAction="#debugger" text="Show source code" />
                </children>
             </AnchorPane>
         </items>

@@ -30,6 +30,7 @@ public class BrowserController {
     Zoom zoom = new Zoom();
 
 
+    public int clicks;
     BrowserMethods bm = new BrowserMethods();
 
 
@@ -58,8 +59,9 @@ public class BrowserController {
     @FXML
     public CheckBox switchTxt, startPageCB;
 
+    @FXML
+    public Button debugBtn;
 
-    public int listIndex;
 
     public String startPage;
 
@@ -78,11 +80,10 @@ public class BrowserController {
     public void initialize() throws IOException, SQLException {
         slider.setMin(0);
         slider.setMax(10);
-        slider.valueProperty().addListener( new ChangeListener<Number>() {
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
 
-            public void changed(ObservableValue<? extends Number >
-                                        observable, Number oldValue, Number newValue)
-            {
+            public void changed(ObservableValue<? extends Number>
+                                        observable, Number oldValue, Number newValue) {
 
                 webView.setFontScale((Double) newValue);
                 System.out.println(newValue);
@@ -113,10 +114,9 @@ public class BrowserController {
             themes.setSavedStyle(anchorPane, Bgcolor);
             //tässä luetaan tiedoston toinen rivi, eli checkboxin tekstiväri ja lähetetään se metodille
             //joka muuttaa cb:n tekstin mustaksi
-            txtFIll=br.readLine();
-            if(txtFIll !=null)
-            {
-                themes.setCBtextColor(startPageCB,switchTxt, txtFIll);
+            txtFIll = br.readLine();
+            if (txtFIll != null) {
+                themes.setCBtextColor(startPageCB, switchTxt, txtFIll);
                 System.out.println(txtFIll);
 
             }
@@ -188,9 +188,7 @@ public class BrowserController {
             webView.setOpacity(0.0);
             txtView.setOpacity(1.0);
             //muutetaan teksilaatikon korkeutta,
-            txtView.setMinHeight(100);
-
-
+            txtView.setMinHeight(200);
 
 
         } else {
@@ -202,7 +200,7 @@ public class BrowserController {
 
 
     public void customTheme(KeyEvent keyEvent) throws IOException {
-        themes.setCustomTheme(keyEvent, colCode,anchorPane);
+        themes.setCustomTheme(keyEvent, colCode, anchorPane);
 
 
     }
@@ -215,18 +213,26 @@ public class BrowserController {
             DBconnection conn = new DBconnection();
             Connection connDB = conn.getConnection();
             Statement stmt = connDB.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT url FROM pages WHERE id=1");
-            //tarkistus löytyykö id 1:llä kannasta talletettua tietoa
-            if (rs.next()) {
-                DBquery = "UPDATE pages SET url = (?) WHERE id=1";
-                PreparedStatement pst = connDB.prepareStatement(DBquery);
-                pst.setString(1, startPage);
-                pst.executeUpdate();
-            } else {
+
+            //tarkistus. löytyykö pages taulusta 1 rivi
+            ResultSet rs = stmt.executeQuery("SELECT * FROM pages ORDER BY id DESC LIMIT 1");
+            //isBeforeFirst palauttaa false, jos rs on tyhjä true jos löytyy tuloksia.
+            System.out.println(rs.isBeforeFirst());
+            //jos rs on tyhjä eli taulusta pages ei löydy yhtään riviä
+
+            if (!rs.isBeforeFirst()) {
                 DBquery = "INSERT INTO pages (url) VALUES (?)";
                 PreparedStatement pst = connDB.prepareStatement(DBquery);
                 pst.setString(1, startPage);
                 pst.executeUpdate();
+
+
+            } else {
+                DBquery = "UPDATE pages SET url = (?)";
+                PreparedStatement pst = connDB.prepareStatement(DBquery);
+                pst.setString(1, startPage);
+                pst.executeUpdate();
+
             }
 
         }
@@ -246,7 +252,13 @@ public class BrowserController {
 
 
             }
-            webView.getEngine().load("http://" + url);
+            if (url == null) {
+                webView.getEngine().load("http://yahoo.com");
+
+            } else {
+                webView.getEngine().load("http://" + url);
+
+            }
 
 
             System.out.println(rs);
@@ -267,6 +279,14 @@ public class BrowserController {
     public void resetScale(ActionEvent event) {
         slider.setValue(0.00);
         webView.setFontScale(1.00);
+
+    }
+
+    public void debugger(ActionEvent event) {
+        clicks+=1;
+        bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn);
+
+
 
     }
 }

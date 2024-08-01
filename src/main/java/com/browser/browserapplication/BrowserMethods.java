@@ -1,5 +1,6 @@
 package com.browser.browserapplication;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -20,8 +21,12 @@ import java.util.List;
 public class BrowserMethods {
     WebEngine webEngine = new WebEngine();
 
+
     public  int listI;
     public boolean BannedSite=false;
+
+
+
 
     public void startBrowsing(List<String> addreslist, TextField addField, CheckBox switchTxt, TextArea txtView, WebView webView) {
         String address = "http://www."+addField.getText();
@@ -92,7 +97,7 @@ public class BrowserMethods {
                 if(titleText.contains("Iltalehti"))
                 {
 
-                    goBlank(contains);
+                    //goBlank(contains);
 
 
                 }
@@ -103,11 +108,6 @@ public class BrowserMethods {
 
     }
 
-
-    public void goBlank(String contains) {
-
-
-    }
 
     public void ScrapeContent(WebView webView, Stage stage) throws IOException {
         //näytetään sivun teksti (innerhtml)
@@ -124,6 +124,35 @@ public class BrowserMethods {
         System.out.println(pageText);
         writer.close();
     }
+
+    public void htmlStructure(WebEngine webEngine, TextArea txtView, WebView webView, TextField addField, int clicks, Button debugBtn) {
+        System.out.println(clicks);
+
+
+        if (clicks%1==0)
+        {
+            txtView.setOpacity(1.0);
+            webView.setOpacity(0.0);
+            txtView.setMinHeight(250);
+            debugBtn.setText("Hide source code");
+            String url = "http://"+addField.getText();
+            webEngine.load(url);
+            String pageText = (String) webEngine.executeScript("document.documentElement.outerHTML");
+            txtView.appendText(pageText);
+
+        }
+        if (clicks %2==0)
+        {
+            txtView.setOpacity(0.0);
+            webView.setOpacity(1.0);
+            debugBtn.setText("Show source code");
+
+        }
+
+
+    }
+
+
 
     }
 

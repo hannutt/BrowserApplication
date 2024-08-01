@@ -29,6 +29,17 @@ which takes the expression "document.documentElement.innerText" as a value. The 
 saved in a text file. The save method contains a dialog where the user can select a folder/location to save the file.
 This feature is implemented in the FileChooser and FileWriter classes.
 
+SHOW PAGE SOURCE CODE
+
+By clicking the source code button, the program hides the webview element and shows the textarea element using the SetOpacity method.
+Then the source code of the retrieved page is displayed in the textarea element in its entirety.
+The source code is obtained by the ExecuteScript method, which contains the command "document.documentElement.outerHTML".
+
+The source code button works dynamically, one click hides the webview and shows the text area and another click does the opposite.
+The dynamism is done with the public int clicks variable. Each time the source code button is clicked, the click variable is incremented by one.
+Then the function is controlled with a division remainder and an if statement. if the result is divisible by 1, the first if the branch is 
+executed, and if the result is divisible by 2, the second if the branch is executed.
+
 BOOKMARKS
 
 Bookmarks can be saved by clicking the Save Bookmark button. The button's method retrieves the typed address 
@@ -43,9 +54,10 @@ Then the webView object performs the loading method, i.e. displays the page of t
 SET THE HOMEPAGE
 
 Like modern browsers, you can set your favorite page as the home page that appears every time you open the program.
-The program's user interface has a set home page check box.
-by clicking the check box, the program executes a method that first checks if the favorite home page is already stored
-in the sql database used by the program, if found, an SQL update query is executed. If not, the SQL insert query is executed.
+The program's user interface has a set home page check box. By clicking the check box, the program executes a method 
+that first checks if the favorite home page is already stored in the SQL database used by the program, if found, an SQL update query is executed. 
+If not, the SQL insert query is executed. Since the table only has one value at a time, I used the isBeforeFirst method and
+SELECT * FROM pages ORDER BY id DESC LIMIT 1" -SQL clause to check the table.
 
 THEMES
 
