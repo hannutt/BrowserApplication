@@ -29,6 +29,12 @@ which takes the expression "document.documentElement.innerText" as a value. The 
 saved in a text file. The save method contains a dialog where the user can select a folder/location to save the file.
 This feature is implemented in the FileChooser and FileWriter classes.
 
+DISABLE AND ENABLE JAVASCRIPT
+
+JavaScript can be enabled and disabled by clicking the checkbox. if the checkbox is checked, the method executes 
+webView.getEngine().setJavaScriptEnabled(false) command. if the method's checkbox is unchecked, the method will change
+the Boolean value to true.
+
 SHOW PAGE SOURCE CODE
 
 By clicking the source code button, the program hides the webview element and shows the textarea element using the SetOpacity method.

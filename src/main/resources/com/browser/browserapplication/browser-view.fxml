@@ -26,7 +26,7 @@
         <items>
           <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="495.0" style="-fx-background-color: black; -fx-border-radius: 20;">
                <children>
-                  <TextField fx:id="addField" layoutX="83.0" layoutY="32.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" prefHeight="25.0" prefWidth="411.0" style="-fx-border-radius: 20;" />
+                  <TextField fx:id="addField" layoutX="83.0" layoutY="32.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" onKeyReleased="#showDropDown" prefHeight="25.0" prefWidth="411.0" style="-fx-border-radius: 20;" />
                   <Button fx:id="nextBtn" layoutX="505.0" layoutY="31.0" mnemonicParsing="false" onAction="#goNextPage">
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -60,11 +60,12 @@
                   <CheckBox fx:id="startPageCB" layoutX="240.0" layoutY="68.0" mnemonicParsing="false" onAction="#saveStartPage" prefHeight="17.0" prefWidth="127.0" text="Set the homepage" textFill="WHITE" />
                   <MenuBar fx:id="menubar" layoutX="83.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="411.0">
                     <menus>
-                      <Menu mnemonicParsing="false" text="File">
+                      <Menu mnemonicParsing="false" text="Options">
                         <items>
                           <MenuItem fx:id="pageContent" mnemonicParsing="false" onAction="#getPageContent" text="Save page content" />
                               <MenuItem fx:id="pageLinks" mnemonicParsing="false" onAction="#getPageLinks" text="Get page links" />
                               <MenuItem mnemonicParsing="false" text="Reload" />
+                              <MenuItem mnemonicParsing="false" text="No images" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Themes">
@@ -108,7 +109,16 @@
                      </graphic>
                   </Button>
                   <TextArea fx:id="txtView" layoutX="105.0" layoutY="91.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="327.0" />
-                  <Button fx:id="debugBtn" layoutX="432.0" layoutY="64.0" mnemonicParsing="false" onAction="#debugger" text="Show source code" />
+                  <Button fx:id="debugBtn" layoutX="432.0" layoutY="64.0" mnemonicParsing="false" onAction="#debugger">
+                     <graphic>
+                        <ImageView fx:id="sourceImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/source-code.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <CheckBox fx:id="disablejs" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#disableJS" text="Disable JS" />
                </children>
             </AnchorPane>
         </items>

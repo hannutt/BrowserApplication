@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
@@ -57,10 +59,16 @@ public class BrowserController {
     public TextArea txtView;
 
     @FXML
-    public CheckBox switchTxt, startPageCB;
+    public CheckBox switchTxt, startPageCB,disablejs;
 
     @FXML
     public Button debugBtn;
+
+    @FXML
+    public ImageView sourceImg;
+
+    @FXML
+    public Pane dropDown;
 
 
     public String startPage;
@@ -284,11 +292,36 @@ public class BrowserController {
 
     public void debugger(ActionEvent event) {
         clicks+=1;
-        bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn);
+        bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn,sourceImg);
 
 
 
     }
+
+    public void showDropDown(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.A) {
+            dropDown.setOpacity(1.0);
+
+
+        }
+
+
+    }
+
+    public void disableJS(ActionEvent event) {
+        if(disablejs.isSelected())
+        {
+            webView.getEngine().setJavaScriptEnabled(false);
+
+        }
+        else{
+            webView.getEngine().setJavaScriptEnabled(true);
+        }
+
+
+    }
+
+
 }
 
 

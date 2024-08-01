@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
@@ -24,6 +26,8 @@ public class BrowserMethods {
 
     public  int listI;
     public boolean BannedSite=false;
+
+
 
 
 
@@ -125,27 +129,31 @@ public class BrowserMethods {
         writer.close();
     }
 
-    public void htmlStructure(WebEngine webEngine, TextArea txtView, WebView webView, TextField addField, int clicks, Button debugBtn) {
+    public void htmlStructure(WebEngine webEngine, TextArea txtView, WebView webView, TextField addField, int clicks, Button debugBtn, ImageView sourceImg) {
         System.out.println(clicks);
 
 
         if (clicks%1==0)
         {
-            txtView.setOpacity(1.0);
-            webView.setOpacity(0.0);
-            txtView.setMinHeight(250);
-            debugBtn.setText("Hide source code");
+
             String url = "http://"+addField.getText();
             webEngine.load(url);
             String pageText = (String) webEngine.executeScript("document.documentElement.outerHTML");
+            txtView.setOpacity(1.0);
+            webView.setOpacity(0.0);
+            txtView.setMinHeight(250);
+            //sourceImg.setImage(new Image("..\\..\\..\\icons\\undo.png"));
+
+
+
             txtView.appendText(pageText);
 
         }
         if (clicks %2==0)
-        {
+        {   txtView.clear();
             txtView.setOpacity(0.0);
             webView.setOpacity(1.0);
-            debugBtn.setText("Show source code");
+
 
         }
 
