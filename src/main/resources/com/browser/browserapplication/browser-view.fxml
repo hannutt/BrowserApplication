@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
@@ -17,14 +18,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<VBox fx:id="Vb" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="630.0" minWidth="650.0" prefHeight="571.0" prefWidth="537.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.browser.browserapplication.BrowserController">
+<VBox fx:id="Vb" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="700.0" prefHeight="571.0" prefWidth="537.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.browser.browserapplication.BrowserController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
       <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="600.0" orientation="VERTICAL" prefHeight="350.0" prefWidth="500.0" style="-fx-border-radius: 10px;">
         <items>
-          <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="495.0" style="-fx-background-color: black; -fx-border-radius: 20;">
+          <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="495.0" style="-fx-border-radius: 20;">
                <children>
                   <TextField fx:id="addField" layoutX="83.0" layoutY="32.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" onKeyReleased="#showDropDown" prefHeight="25.0" prefWidth="411.0" style="-fx-border-radius: 20;" />
                   <Button fx:id="nextBtn" layoutX="505.0" layoutY="31.0" mnemonicParsing="false" onAction="#goNextPage">
@@ -45,8 +46,8 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="zoomMinus" layoutX="532.0" layoutY="105.0" mnemonicParsing="false" onAction="#MinusZoom" prefHeight="27.0" prefWidth="32.0" />
-                  <Button fx:id="zoomPlus" layoutX="480.0" layoutY="105.0" mnemonicParsing="false" onAction="#PlusZoom">
+                  <Button fx:id="zoomMinus" layoutX="532.0" layoutY="119.0" mnemonicParsing="false" onAction="#MinusZoom" prefHeight="27.0" prefWidth="32.0" />
+                  <Button fx:id="zoomPlus" layoutX="477.0" layoutY="119.0" mnemonicParsing="false" onAction="#PlusZoom">
                      <graphic>
                         <ImageView fx:id="zoomIn" fitHeight="82.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -55,9 +56,9 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <CheckBox fx:id="switchTxt" layoutX="100.0" layoutY="68.0" mnemonicParsing="false" onAction="#switchTxt" text="Switch to text mode" textFill="#f5f5f5" />
-                  <WebView fx:id="webView" layoutX="14.0" layoutY="139.0" minHeight="380.0" minWidth="550.0" prefHeight="243.0" prefWidth="442.0" />
-                  <CheckBox fx:id="startPageCB" layoutX="240.0" layoutY="68.0" mnemonicParsing="false" onAction="#saveStartPage" prefHeight="17.0" prefWidth="127.0" text="Set the homepage" textFill="WHITE" />
+                  <CheckBox fx:id="switchTxt" layoutX="100.0" layoutY="109.0" mnemonicParsing="false" onAction="#switchTxt" text="Switch to text mode" textFill="#f5f5f5" />
+                  <WebView fx:id="webView" layoutX="14.0" layoutY="154.0" minHeight="380.0" minWidth="550.0" prefHeight="243.0" prefWidth="442.0" />
+                  <CheckBox fx:id="startPageCB" layoutX="242.0" layoutY="132.0" mnemonicParsing="false" onAction="#saveStartPage" prefHeight="17.0" prefWidth="127.0" text="Set the homepage" textFill="WHITE" />
                   <MenuBar fx:id="menubar" layoutX="83.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="411.0">
                     <menus>
                       <Menu mnemonicParsing="false" text="Options">
@@ -85,7 +86,7 @@
                         <SepiaTone />
                      </effect>
                   </MenuBar>
-                  <Button fx:id="saveBmBtn" layoutX="546.0" layoutY="29.0" mnemonicParsing="false" onAction="#saveBookmark" prefHeight="25.0" prefWidth="32.0">
+                  <Button fx:id="saveBmBtn" layoutX="531.0" layoutY="77.0" mnemonicParsing="false" onAction="#saveBookmark" prefHeight="25.0" prefWidth="32.0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -93,13 +94,13 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <ImageView fx:id="zoomOut" fitHeight="75.0" fitWidth="19.0" layoutX="539.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="zoomOut" fitHeight="75.0" fitWidth="19.0" layoutX="539.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icons/zoom-out.png" />
                      </image>
                   </ImageView>
-                  <Slider fx:id="slider" layoutX="570.0" layoutY="165.0" orientation="VERTICAL" />
-                  <Button layoutX="19.0" layoutY="105.0" mnemonicParsing="false" onAction="#resetScale">
+                  <Slider fx:id="slider" layoutX="570.0" layoutY="165.0"  orientation="VERTICAL" />
+                  <Button layoutX="40.0" layoutY="66.0" mnemonicParsing="false" onAction="#resetScale">
                      <graphic>
                         <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,8 +109,8 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextArea fx:id="txtView" layoutX="105.0" layoutY="91.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="327.0" />
-                  <Button fx:id="debugBtn" layoutX="432.0" layoutY="64.0" mnemonicParsing="false" onAction="#debugger">
+                  <TextArea fx:id="txtView" layoutX="15.0" layoutY="165.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="541.0" />
+                  <Button fx:id="debugBtn" layoutX="477.0" layoutY="77.0" mnemonicParsing="false" onAction="#debugger">
                      <graphic>
                         <ImageView fx:id="sourceImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,7 +119,10 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <CheckBox fx:id="disablejs" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#disableJS" text="Disable JS" />
+                  <CheckBox fx:id="disablejs" layoutX="100.0" layoutY="132.0" mnemonicParsing="false" onAction="#disableJS" text="Disable JS" />
+                  <TextField fx:id="searchField" layoutX="319.0" layoutY="105.0" opacity="0.0" />
+                  <Button fx:id="findBtn" layoutX="520.0" layoutY="66.0" mnemonicParsing="false" onAction="#findText" opacity="0.0" text="Find" />
+                  <ProgressBar fx:id="loadingBar" layoutX="157.0" layoutY="57.0" prefWidth="200.0" progress="0.0" />
                </children>
             </AnchorPane>
         </items>

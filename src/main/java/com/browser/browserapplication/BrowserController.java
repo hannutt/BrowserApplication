@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodHighlight;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -44,7 +45,7 @@ public class BrowserController {
     public WebView webView;
 
     @FXML
-    public TextField addField, colCode;
+    public TextField addField, colCode,searchField;
 
     @FXML
     public Stage stage;
@@ -56,13 +57,16 @@ public class BrowserController {
     public VBox Vb;
 
     @FXML
+    public  ProgressBar loadingBar;
+
+    @FXML
     public TextArea txtView;
 
     @FXML
     public CheckBox switchTxt, startPageCB,disablejs;
 
     @FXML
-    public Button debugBtn;
+    public Button debugBtn,findBtn;
 
     @FXML
     public ImageView sourceImg;
@@ -78,6 +82,8 @@ public class BrowserController {
     WebHistory history = webEngine.getHistory();
 
 
+
+
     Bookmarks bom = new Bookmarks();
 
 
@@ -88,7 +94,8 @@ public class BrowserController {
     public void initialize() throws IOException, SQLException {
         slider.setMin(0);
         slider.setMax(10);
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
+        //slider komponentin koodi, jolla kasvatetaan ja pienennetään sliderin arvoa.
+        slider.valueProperty().addListener(  new ChangeListener<Number>() {
 
             public void changed(ObservableValue<? extends Number>
                                         observable, Number oldValue, Number newValue) {
@@ -134,7 +141,8 @@ public class BrowserController {
     }
 
     public void goPage(ActionEvent actionEvent) {
-        bm.startBrowsing(addreslist, addField, switchTxt, txtView, webView);
+
+        bm.startBrowsing(addreslist, addField, switchTxt, txtView, webView,loadingBar);
 
     }
 
@@ -160,6 +168,7 @@ public class BrowserController {
     //funtio suoritetaan jos osoitekentän ollessa aktiivisena painetaan enteriä.
     public void goPageEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
+            loadingBar.setProgress(0.0);
             //parametrillista funktiota voi kutsua myös ilman parametria antmalla arvoksi null
             goPage(null);
 
@@ -195,6 +204,7 @@ public class BrowserController {
         if (switchTxt.isSelected()) {
             webView.setOpacity(0.0);
             txtView.setOpacity(1.0);
+
             //muutetaan teksilaatikon korkeutta,
             txtView.setMinHeight(200);
 
@@ -202,6 +212,8 @@ public class BrowserController {
         } else {
             webView.setOpacity(1.0);
             txtView.setOpacity(0.0);
+            searchField.setOpacity(0.0);
+
         }
 
     }
@@ -292,7 +304,7 @@ public class BrowserController {
 
     public void debugger(ActionEvent event) {
         clicks+=1;
-        bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn,sourceImg);
+        bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn,sourceImg,searchField,findBtn);
 
 
 
@@ -317,6 +329,16 @@ public class BrowserController {
         else{
             webView.getEngine().setJavaScriptEnabled(true);
         }
+
+
+    }
+
+
+    public void findText(ActionEvent event) {
+
+        String find = searchField.getText();
+        String text = txtView.getText();
+        System.out.println(text.indexOf(find));
 
 
     }

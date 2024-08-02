@@ -3,11 +3,24 @@ Project keywords: Java, Lynx clone, webbrowser clone, WebView,MySQL
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
 
+WebView
 ![UI.png](UI.png)
+
+Text View
+
+![txtview.png](txtview.png)
 
 
 
 MAIN FEATURES
+
+UI & UX
+
+The user interface is made with Gluon's SceneBuilder. Most of the buttons have 16 and 24 pixel icons and the icons
+are downloaded from www.flaticon.com. The user interface has a progress bar that fills only when the page has fully loaded. 
+the loading of the page is controlled by the Worker State object. The idea behind this is to give the user a visual idea 
+that the page is completely ready to use.
+
 
 WebView Browser
 
