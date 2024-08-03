@@ -68,6 +68,7 @@ public class BrowserMethods {
 
             addreslist.add(address);
             webView.getEngine().load(address);
+
             listI+=1;
 
 

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.web.WebView?>
 
 <VBox fx:id="Vb" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="700.0" prefHeight="571.0" prefWidth="537.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.browser.browserapplication.BrowserController">
@@ -57,7 +59,7 @@
                      </graphic>
                   </Button>
                   <CheckBox fx:id="switchTxt" layoutX="100.0" layoutY="109.0" mnemonicParsing="false" onAction="#switchTxt" text="Switch to text mode" textFill="#f5f5f5" />
-                  <WebView fx:id="webView" layoutX="14.0" layoutY="154.0" minHeight="380.0" minWidth="550.0" prefHeight="243.0" prefWidth="442.0" />
+                  <WebView fx:id="webView" layoutX="14.0" layoutY="154.0" minHeight="361.0" minWidth="550.0" prefHeight="361.0" prefWidth="550.0" />
                   <CheckBox fx:id="startPageCB" layoutX="242.0" layoutY="132.0" mnemonicParsing="false" onAction="#saveStartPage" prefHeight="17.0" prefWidth="127.0" text="Set the homepage" textFill="WHITE" />
                   <MenuBar fx:id="menubar" layoutX="83.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="411.0">
                     <menus>
@@ -123,6 +125,8 @@
                   <TextField fx:id="searchField" layoutX="319.0" layoutY="105.0" opacity="0.0" />
                   <Button fx:id="findBtn" layoutX="520.0" layoutY="66.0" mnemonicParsing="false" onAction="#findText" opacity="0.0" text="Find" />
                   <ProgressBar fx:id="loadingBar" layoutX="157.0" layoutY="57.0" prefWidth="200.0" progress="0.0" />
+                  <Label fx:id="connLbl" layoutX="483.0" layoutY="526.0" text="CONNECTION" />
+                  <Circle fx:id="connShape" fill="#ff1f1f" layoutX="577.0" layoutY="534.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </AnchorPane>
         </items>

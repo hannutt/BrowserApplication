@@ -21,6 +21,12 @@ are downloaded from www.flaticon.com. The user interface has a progress bar that
 the loading of the page is controlled by the Worker State object. The idea behind this is to give the user a visual idea 
 that the page is completely ready to use.
 
+Another visual idea is the element describing the state of the Internet connection, which appears in the lower right 
+corner of the user interface. If there is a connection, the element is shown in green, and if there is no connection, 
+the element is red. This is done with the Process class object which sends a ping command to google.com.
+if the result of the ping command is 0, the element is filled with the green command setStyle('fx-fill:green)
+Otherwise, the color of the setStyle setting will be red.
+
 
 WebView Browser
 

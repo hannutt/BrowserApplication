@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
@@ -74,6 +75,8 @@ public class BrowserController {
     @FXML
     public Pane dropDown;
 
+    @FXML
+    public Circle connShape;
 
     public String startPage;
 
@@ -91,7 +94,7 @@ public class BrowserController {
     List<String> addreslist = new ArrayList<String>();
 
 
-    public void initialize() throws IOException, SQLException {
+    public void initialize() throws IOException, SQLException, InterruptedException {
         slider.setMin(0);
         slider.setMax(10);
         //slider komponentin koodi, jolla kasvatetaan ja pienennetään sliderin arvoa.
@@ -106,6 +109,7 @@ public class BrowserController {
 
         });
         getSavedStartPage();
+        checkConnection();
         bom.ShowBookmarks(bookmarks, webView);
         StyleConfiguration();
 
@@ -328,9 +332,22 @@ public class BrowserController {
         }
         else{
             webView.getEngine().setJavaScriptEnabled(true);
+
         }
 
 
+    }
+
+    public void checkConnection() throws IOException, InterruptedException {
+        Process process = java.lang.Runtime.getRuntime().exec("ping www.google.com");
+        int x = process.waitFor();
+        if (x == 0) {
+            connShape.setStyle("-fx-fill:green");
+
+        }
+        else {
+           connShape.setStyle("-fx-fill:red");
+        }
     }
 
 
