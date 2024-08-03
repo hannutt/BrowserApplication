@@ -99,7 +99,7 @@
                         <Image url="@../../../icons/zoom-out.png" />
                      </image>
                   </ImageView>
-                  <Slider fx:id="slider" layoutX="570.0" layoutY="165.0"  orientation="VERTICAL" />
+                  <Slider fx:id="slider" layoutX="570.0" layoutY="165.0" orientation="VERTICAL" />
                   <Button layoutX="40.0" layoutY="66.0" mnemonicParsing="false" onAction="#resetScale">
                      <graphic>
                         <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">

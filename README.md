@@ -61,7 +61,7 @@ executed, and if the result is divisible by 2, the second if the branch is execu
 
 BOOKMARKS
 
-Bookmarks can be saved by clicking the Save Bookmark button. The button's method retrieves the typed address 
+Bookmarks can be saved by clicking the Bookmark icon. The button's method retrieves the typed address 
 from the address field and stores it in the SQL database.
 
 Saved bookmarks appear in the Bookmarks menu. Clicking on the bookmark menu executes a method that creates a 
@@ -69,6 +69,11 @@ menuitem item for each saved bookmark stored in the program's sql database.
 In each menu item, you can access the url address of the menu item by clicking on the desired address. 
 Each menu item has an event handler that grabs the URL of the clicked menu item and sends it to the WebView object.
 Then the webView object performs the loading method, i.e. displays the page of the clicked bookmark.
+
+Saved bookmarks have a submenu for deletion. Deletion is done by clicking on the name of the bookmark to be deleted.
+Before deleting the bookmark, the program displays a confirmation window with yes/cancel buttons.
+Pressing the Yes button calls the remove method, which removes the selected bookmark from the SQL database.
+The Cancel button closes the confirmation window and returns to the program.
 
 SET THE HOMEPAGE
 
