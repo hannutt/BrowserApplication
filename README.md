@@ -36,10 +36,11 @@ user input with the startswith method. if the input starts with the words www or
 telling you that no prefixes are needed. The Label component disappears from view after 3 seconds. 
 Timing is implemented with the Timer class.
 
-Another helper also monitors user input using the endswith method. if the user's input ends with a dot, the program
-opens a new window with common www endpoints as buttons, such as .fi, .com, .org, etc. By clicking on the button, 
-its endpoint is added to the address field as a continuation of the already existing text.
-This property is made to be an event handler that handles mouse clicks
+Another helper also monitors user input using the endswith method. if the user input ends with a dot, the program
+opens a new window containing common top-level domains as buttons, such as .fi, .com, .org, etc. By clicking the button,
+its domain name is added to the address field as a continuation of the already existing text.
+This property is made as an event handler that recognizes mouse clicks and uses the getSource 
+and getId methods to identify the clicked button and retrieve its text value.
 
 WebView Browser
 

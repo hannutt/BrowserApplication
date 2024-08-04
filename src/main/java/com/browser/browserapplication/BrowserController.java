@@ -70,9 +70,6 @@ public class BrowserController {
     public ImageView sourceImg;
 
     @FXML
-    public Pane dropDown;
-
-    @FXML
     public Label helperLbl;
     @FXML
     public Circle connShape;
@@ -99,15 +96,9 @@ public class BrowserController {
         slider.setMin(0);
         slider.setMax(10);
         //slider komponentin koodi, jolla kasvatetaan ja pienennetään sliderin arvoa.
-        slider.valueProperty().addListener(  new ChangeListener<Number>() {
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-
-            public void changed(ObservableValue<? extends Number>
-                                        observable, Number oldValue, Number newValue) {
-
-                webView.setFontScale((Double) newValue);
-                System.out.println(newValue);
-            }
+            webView.setFontScale((Double) newValue);
 
         });
         getSavedStartPage();
@@ -122,19 +113,10 @@ public class BrowserController {
         addField.textProperty().addListener((observable, oldValue, newValue) -> {
             if ( helpersOn && newValue.endsWith("."))
             {
-                endOptions();
+                helpers.endOptions(addField);
 
             }
-
-
-
         });
-
-
-
-        //webView.getEngine().load("http://google.com");
-
-
     }
 
     public void StyleConfiguration() throws IOException {
@@ -199,39 +181,6 @@ public class BrowserController {
 
     }
 
-    public void endOptions() {
-        Stage optionStage = new Stage();
-        HBox hb = new HBox();
-        Button comBtn = new Button("com");
-        comBtn.setId("com");
-        //lisätään buttoniin tapahtumankäsittelijä, joka suoritetaan kun painketta on klikattu hiirellä.
-        //eli ensin tulee tapahtuman tyyppi = hiiren klikkaus ja sen jälkeen kerrotaan, mikä metodi suoritetaan
-        //itse tapahtumankäsittelijä funktio määritellään alempana, tässä se vain liitetään buttoniin.
-        comBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,getBtnTxt);
-
-        Button fiBtn = new Button("fi");
-        fiBtn.setId("fi");
-        fiBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,getBtnTxt);
-        hb.getChildren().addAll(comBtn,fiBtn);
-        Scene scene = new Scene(hb, 100, 100);
-        optionStage.setScene(scene);
-        optionStage.show();
-
-    }
-    EventHandler<MouseEvent>getBtnTxt=new EventHandler<MouseEvent>() {
-        @Override
-        //tämä metodi selvittää painetun buttonin id-arvon
-        public void handle(MouseEvent mouseEvent) {
-            String previousTxt=addField.getText();
-            String btnId=((Control)mouseEvent.getSource()).getId();
-            addField.setText(previousTxt+btnId);
-
-
-        }
-    };
-    public void getButtonText() {
-
-    }
 
     public void setDarkTheme(ActionEvent actionEvent) throws IOException {
         themes.useDarkTheme(anchorPane);
@@ -365,8 +314,6 @@ public class BrowserController {
 
 
     }
-
-
     public void disableJS(ActionEvent event) {
         if(disablejs.isSelected())
         {
@@ -382,15 +329,7 @@ public class BrowserController {
     }
 
     public void checkConnection() throws IOException, InterruptedException {
-        Process process = java.lang.Runtime.getRuntime().exec("ping www.google.com");
-        int x = process.waitFor();
-        if (x == 0) {
-            connShape.setStyle("-fx-fill:green");
-
-        }
-        else {
-           connShape.setStyle("-fx-fill:red");
-        }
+      helpers.runConnCheck(connShape);
     }
 
 
@@ -403,14 +342,10 @@ public class BrowserController {
 
     }
 
-
     public void turnHelpersOn(ActionEvent event) {
         helpersOn=true;
         helpers.UrlChecker(addField,helperLbl,helpersOn);
     }
 }
-
-
-
 
 
