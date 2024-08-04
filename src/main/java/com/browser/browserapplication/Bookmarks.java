@@ -27,7 +27,7 @@ public class Bookmarks {
             MenuItem mi = new MenuItem();
 
             mi.setText(rs.getString(1));
-            //alivalikon menuitemit saa teksin delete
+            //alivalikon menuitemit saa tekstin delete
             //luodaan alivalikko
             Menu subMenu = new Menu();
             MenuItem subMi = new MenuItem("Delete "+rs.getString(1));

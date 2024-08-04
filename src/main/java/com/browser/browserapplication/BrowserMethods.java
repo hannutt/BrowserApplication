@@ -178,16 +178,16 @@ public void checkIsFullyLoaded(WebView webView, ProgressBar loadingBar) {
         }
         else {
             txtView.clear();
-            String url = "http://"+addField.getText();
-            webEngine.load(url);
-            String pageText = (String) webEngine.executeScript("document.documentElement.outerHTML");
+            //String url = "http://"+addField.getText();
+            //webEngine.load(url);
+            String pageText = (String) webView.getEngine().executeScript("document.documentElement.outerHTML");
             txtView.setOpacity(1.0);
             webView.setOpacity(0.0);
             txtView.setMinHeight(250);
-            searchField.setOpacity(1.0);
-            findBtn.setOpacity(1.0);
+            //searchField.setOpacity(1.0);
+            //findBtn.setOpacity(1.0);
             //sourceImg.setImage(new Image("..\\..\\..\\icons\\undo.png"));
-            txtView.appendText(pageText);
+            txtView.setText(pageText);
 
 
         }

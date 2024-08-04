@@ -27,6 +27,19 @@ the element is red. This is done with the Process class object which sends a pin
 if the result of the ping command is 0, the element is filled with the green command setStyle('fx-fill:green)
 Otherwise, the color of the setStyle setting will be red.
 
+To improve the user experience, the program has a few "assistants". Assistants are disabled by default, 
+but the user can enable them from the menu. if assistants are on, they help with the following:
+
+When you type a url, the words "http" and "www" are encoded in the webview object, so the user only needs
+to type the page name and endpoint, for example google.com. the address field has an event listener that monitors
+user input with the startswith method. if the input starts with the words www or http, a Label component appears,
+telling you that no prefixes are needed. The Label component disappears from view after 3 seconds. 
+Timing is implemented with the Timer class.
+
+Another helper also monitors user input using the endswith method. if the user's input ends with a dot, the program
+opens a new window with common www endpoints as buttons, such as .fi, .com, .org, etc. By clicking on the button, 
+its endpoint is added to the address field as a continuation of the already existing text.
+This property is made to be an event handler that handles mouse clicks
 
 WebView Browser
 

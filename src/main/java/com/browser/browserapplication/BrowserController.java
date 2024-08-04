@@ -3,30 +3,27 @@ package com.browser.browserapplication;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodHighlight;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.sql.*;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class BrowserController {
@@ -76,6 +73,8 @@ public class BrowserController {
     public Pane dropDown;
 
     @FXML
+    public Label helperLbl;
+    @FXML
     public Circle connShape;
 
     public String startPage;
@@ -83,6 +82,7 @@ public class BrowserController {
 
     WebEngine webEngine = new WebEngine();
     WebHistory history = webEngine.getHistory();
+    Helpers helpers = new Helpers();
 
 
 
@@ -94,11 +94,13 @@ public class BrowserController {
     List<String> addreslist = new ArrayList<String>();
 
 
+    public boolean helpersOn=false;
     public void initialize() throws IOException, SQLException, InterruptedException {
         slider.setMin(0);
         slider.setMax(10);
         //slider komponentin koodi, jolla kasvatetaan ja pienennetään sliderin arvoa.
         slider.valueProperty().addListener(  new ChangeListener<Number>() {
+
 
             public void changed(ObservableValue<? extends Number>
                                         observable, Number oldValue, Number newValue) {
@@ -110,8 +112,25 @@ public class BrowserController {
         });
         getSavedStartPage();
         checkConnection();
+
         bom.ShowBookmarks(bookmarks, webView);
         StyleConfiguration();
+
+
+        //textpropertyyn voidaan liittää kuuntelija, eli tässä tapauksessa jos
+        //merkkijono loppuu pisteeseen, kutsutaan endoptions metodia
+        addField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if ( helpersOn && newValue.endsWith("."))
+            {
+                endOptions();
+
+            }
+
+
+
+        });
+
+
 
         //webView.getEngine().load("http://google.com");
 
@@ -175,9 +194,42 @@ public class BrowserController {
             loadingBar.setProgress(0.0);
             //parametrillista funktiota voi kutsua myös ilman parametria antmalla arvoksi null
             goPage(null);
+        }
+
+
+    }
+
+    public void endOptions() {
+        Stage optionStage = new Stage();
+        HBox hb = new HBox();
+        Button comBtn = new Button("com");
+        comBtn.setId("com");
+        //lisätään buttoniin tapahtumankäsittelijä, joka suoritetaan kun painketta on klikattu hiirellä.
+        //eli ensin tulee tapahtuman tyyppi = hiiren klikkaus ja sen jälkeen kerrotaan, mikä metodi suoritetaan
+        //itse tapahtumankäsittelijä funktio määritellään alempana, tässä se vain liitetään buttoniin.
+        comBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,getBtnTxt);
+
+        Button fiBtn = new Button("fi");
+        fiBtn.setId("fi");
+        fiBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,getBtnTxt);
+        hb.getChildren().addAll(comBtn,fiBtn);
+        Scene scene = new Scene(hb, 100, 100);
+        optionStage.setScene(scene);
+        optionStage.show();
+
+    }
+    EventHandler<MouseEvent>getBtnTxt=new EventHandler<MouseEvent>() {
+        @Override
+        //tämä metodi selvittää painetun buttonin id-arvon
+        public void handle(MouseEvent mouseEvent) {
+            String previousTxt=addField.getText();
+            String btnId=((Control)mouseEvent.getSource()).getId();
+            addField.setText(previousTxt+btnId);
 
 
         }
+    };
+    public void getButtonText() {
 
     }
 
@@ -314,15 +366,6 @@ public class BrowserController {
 
     }
 
-    public void showDropDown(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.A) {
-            dropDown.setOpacity(1.0);
-
-
-        }
-
-
-    }
 
     public void disableJS(ActionEvent event) {
         if(disablejs.isSelected())
@@ -361,6 +404,10 @@ public class BrowserController {
     }
 
 
+    public void turnHelpersOn(ActionEvent event) {
+        helpersOn=true;
+        helpers.UrlChecker(addField,helperLbl,helpersOn);
+    }
 }
 
 
