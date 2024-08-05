@@ -79,21 +79,27 @@ The dynamism is done with the public int clicks variable. Each time the source c
 Then the function is controlled with a division remainder and an if statement. if the result is divisible by 1, the first if the branch is 
 executed, and if the result is divisible by 2, the second if the branch is executed.
 
-BOOKMARKS
+BOOKMARK MENU & BOOKMARK BAR
 
-Bookmarks can be saved by clicking the Bookmark icon. The button's method retrieves the typed address 
-from the address field and stores it in the SQL database.
+Bookmarks can be saved to the menu or bookmark bar by clicking the Bookmark icon. The button method first opens a dialog and asks if the
+user wants to save the bookmark to the menu or bookmark bar. Then the method retrieves the typed address from the address field and
+stores it in the SQL database.
 
-Saved bookmarks appear in the Bookmarks menu. Clicking on the bookmark menu executes a method that creates a 
-menuitem item for each saved bookmark stored in the program's sql database.
-In each menu item, you can access the url address of the menu item by clicking on the desired address. 
-Each menu item has an event handler that grabs the URL of the clicked menu item and sends it to the WebView object.
-Then the webView object performs the loading method, i.e. displays the page of the clicked bookmark.
+Bookmarks saved in the menu appear in the Bookmarks menu. Clicking on the bookmark menu executes a method that creates
+menu item in the while loop for each bookmark stored in the program's sql database.
+In each menu item, you can access the url address of the menu item by clicking on the desired address.
+Each menu item has an event handler that grabs the URL of the menu item that was clicked and sends it to the WebView object.
+After this, the webView object performs the loading method, i.e. displays the page of the clicked bookmark.
 
 Saved bookmarks have a submenu for deletion. Deletion is done by clicking on the name of the bookmark to be deleted.
 Before deleting the bookmark, the program displays a confirmation window with yes/cancel buttons.
 Pressing the Yes button calls the remove method, which removes the selected bookmark from the SQL database.
 The Cancel button closes the confirmation window and returns to the program.
+
+The addresses stored in the bookmark bar are displayed inside the button bar element, each in its own button using 
+a while loop.
+
+
 
 SET THE HOMEPAGE
 

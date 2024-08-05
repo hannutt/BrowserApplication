@@ -20,6 +20,9 @@ public class Helpers {
         addField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (helpersOn && newValue.startsWith("www"))
             {
+                String replacedVal;
+                replacedVal= newValue.replace("www","");
+                addField.setText(replacedVal);
                 helperLbl.setOpacity(1.0);
                 helperLbl.setStyle("-fx-background-color:red");
                 helperLbl.setText("www or http no needed");

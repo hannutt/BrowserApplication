@@ -2,18 +2,60 @@ package com.browser.browserapplication;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.web.WebView;
 
 import java.sql.*;
 import java.util.Optional;
 
+
 public class Bookmarks {
+
+
+    public Menu  bookmarks;
+
+    @FXML
+    public WebView webView;
 
 
     public String BookmarkToSave;
 
 
+    public void ChoiseBookmarkPlace(TextField addField) throws SQLException {
+
+        String[] options={"Bookmark menu","Bookmark bar"};
+        ChoiceDialog<String> cd = new ChoiceDialog<>(options[0],options[1]);
+        Optional<String> result = cd.showAndWait();
+        //result.isPresent() palauttaa false, jos käyttäjä ei valinnut mitään tai peruuttaa valintaikkunan.
+        if (result.isPresent() && result.get().equals("Bookmark menu")){
+            executeSave(addField);
+
+
+        }
+        else if (result.isPresent() && result.get().equals("Bookmark bar")) {
+            saveToBookmarkBar(addField);
+        }
+
+        else {
+            cd.close();
+        }
+    }
+
+    public void showBookmarkBarLinks(ButtonBar bookmarkbar) throws SQLException {
+        DBconnection conn = new DBconnection();
+        Connection connDB = conn.getConnection();
+        Statement stmt=connDB.createStatement();
+        ResultSet rs=stmt.executeQuery("select address FROM Bookmarkbar");
+        while (rs.next())
+        {
+            Button barBtn = new Button();
+            barBtn.setText(rs.getString(1));
+            bookmarkbar.getButtons().addAll(barBtn);
+        }
+
+
+    }
     public void ShowBookmarks(Menu bookmarks, WebView webView) throws SQLException {
         DBconnection conn = new DBconnection();
         Connection connDB = conn.getConnection();
@@ -25,12 +67,15 @@ public class Bookmarks {
         {
 
             MenuItem mi = new MenuItem();
+            Menu subMenu = new Menu();
+            MenuItem subMi = new MenuItem();
 
             mi.setText(rs.getString(1));
             //alivalikon menuitemit saa tekstin delete
             //luodaan alivalikko
-            Menu subMenu = new Menu();
-            MenuItem subMi = new MenuItem("Delete "+rs.getString(1));
+
+
+            subMi.setText("Delete "+rs.getString(1));
             //lisätääb menuitemit alivalikkoon.
             subMenu.getItems().addAll(subMi);
             bookmarks.getItems().addAll(mi,subMenu);
@@ -100,6 +145,17 @@ public class Bookmarks {
         PreparedStatement pst = connDB.prepareStatement(DBquery);
         pst.setString(1,BookmarkToSave);
         pst.executeUpdate();
+    }
+
+    public void saveToBookmarkBar(TextField addField) throws SQLException {
+        BookmarkToSave=addField.getText();
+        DBconnection conn = new DBconnection();
+        Connection connDB = conn.getConnection();
+        String DBquery="INSERT INTO Bookmarkbar (address) VALUES (?)";
+        PreparedStatement pst = connDB.prepareStatement(DBquery);
+        pst.setString(1,BookmarkToSave);
+        pst.executeUpdate();
+
     }
 
     }

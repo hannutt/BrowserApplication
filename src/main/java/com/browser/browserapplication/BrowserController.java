@@ -1,19 +1,12 @@
 package com.browser.browserapplication;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.web.WebEngine;
@@ -74,6 +67,9 @@ public class BrowserController {
     @FXML
     public Circle connShape;
 
+    @FXML
+    public ButtonBar bookmarkbar;
+
     public String startPage;
 
 
@@ -90,6 +86,13 @@ public class BrowserController {
     Themes themes = new Themes();
     List<String> addreslist = new ArrayList<String>();
 
+    public Menu getMenuItem() {
+        return bookmarks;
+    }
+    public void setMenuItem(Menu me){
+        this.bookmarks=me;
+    }
+
 
     public boolean helpersOn=false;
     public void initialize() throws IOException, SQLException, InterruptedException {
@@ -102,9 +105,11 @@ public class BrowserController {
 
         });
         getSavedStartPage();
-        checkConnection();
+        helpers.runConnCheck(connShape);
 
         bom.ShowBookmarks(bookmarks, webView);
+        bom.showBookmarkBarLinks(bookmarkbar);
+
         StyleConfiguration();
 
 
@@ -296,8 +301,7 @@ public class BrowserController {
 
 
     public void saveBookmark(ActionEvent actionEvent) throws SQLException {
-
-        bom.executeSave(addField);
+        bom.ChoiseBookmarkPlace(addField);
 
     }
 
@@ -327,11 +331,6 @@ public class BrowserController {
 
 
     }
-
-    public void checkConnection() throws IOException, InterruptedException {
-      helpers.runConnCheck(connShape);
-    }
-
 
     public void findText(ActionEvent event) {
 
