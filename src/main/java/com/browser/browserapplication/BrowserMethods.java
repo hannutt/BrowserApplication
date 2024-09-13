@@ -183,7 +183,7 @@ public void checkIsFullyLoaded(WebView webView, ProgressBar loadingBar) {
             String pageText = (String) webView.getEngine().executeScript("document.documentElement.outerHTML");
             txtView.setOpacity(1.0);
             webView.setOpacity(0.0);
-            txtView.setMinHeight(250);
+            txtView.setMinHeight(350);
             //searchField.setOpacity(1.0);
             //findBtn.setOpacity(1.0);
             //sourceImg.setImage(new Image("..\\..\\..\\icons\\undo.png"));

@@ -11,7 +11,13 @@ The bookmark bar is above the address field and other functions can be found in 
 Overview when the user has switched the browser to text view. The WebView component is hidden and the TextArea
 component is shown instead. Changing the view is done by clicking on the check box.
 
-![txtUI.png](txtUI.png)
+![textUI.png](textUI.png)
+
+Overview when the user has selected debug mode. This mode shows the html structure of the web page.
+
+![debugUI.png](debugUI.png)
+
+
 
 
 
