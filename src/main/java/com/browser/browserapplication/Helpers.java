@@ -21,11 +21,11 @@ public class Helpers {
             if (helpersOn && newValue.startsWith("www"))
             {
                 String replacedVal;
-                replacedVal= newValue.replace("www","");
-                addField.setText(replacedVal);
+                //replacedVal= newValue.replace("www","");
+                //addField.setText(replacedVal);
                 helperLbl.setOpacity(1.0);
                 helperLbl.setStyle("-fx-background-color:red");
-                helperLbl.setText("www or http no needed");
+                helperLbl.setText("no www or http needed");
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
                             @Override

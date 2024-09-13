@@ -3,10 +3,13 @@ Project keywords: Java, Lynx clone, webbrowser clone, WebView,MySQL
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
 the text of the web page the user is looking for.
 
-WebView
-![UI.png](UI.png)
+overview of the browser interface. the user has typed the address yahoo.com into the address field of the browser and the webView component displays the desired page
+The bookmark bar is above the address field and other functions can be found in the buttons and drop-down menus
+![browserUI.png](browserUI.png)
 
-Text View
+
+Overview when the user has switched the browser to text view. The WebView component is hidden and the TextArea
+component is shown instead. Changing the view is done by clicking on the check box.
 
 ![txtview.png](txtview.png)
 
@@ -97,7 +100,8 @@ Pressing the Yes button calls the remove method, which removes the selected book
 The Cancel button closes the confirmation window and returns to the program.
 
 The addresses stored in the bookmark bar are displayed inside the button bar element, each in its own button using 
-a while loop.
+a while loop. the bookmark bar address button can be removed from the user interface and database by right-clicking. 
+An event handler is set for the buttons, which recognizes the right mouse button press and calls the delete method.
 
 
 

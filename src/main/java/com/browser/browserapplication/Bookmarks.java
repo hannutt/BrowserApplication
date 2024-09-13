@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 
 import java.sql.*;
@@ -42,19 +44,69 @@ public class Bookmarks {
         }
     }
 
-    public void showBookmarkBarLinks(ButtonBar bookmarkbar) throws SQLException {
+    public void showBookmarkBarLinks(ButtonBar bookmarkbar,WebView webView) throws SQLException {
         DBconnection conn = new DBconnection();
         Connection connDB = conn.getConnection();
         Statement stmt=connDB.createStatement();
         ResultSet rs=stmt.executeQuery("select address FROM Bookmarkbar");
+        int i = 0;
         while (rs.next())
         {
+            i=i+1;
             Button barBtn = new Button();
+            barBtn.setStyle("-fx-background-color: #c4edf5 \"-fx-border-radius: 30;\"");
+
+            barBtn.setId(String.valueOf(i));
             barBtn.setText(rs.getString(1));
+            EventHandler<ActionEvent>getButtonLink = new EventHandler<ActionEvent>() {
+                @Override
+                //lähetetään klikattu linkki eli menuitemin teksti webview:lle.
+                public void handle(ActionEvent e) {
+
+
+                    String url ="http://"+((Button)e.getSource()).getText();
+                    webView.getEngine().load(url);
+                    System.out.println(url);
+
+
+                }
+
+            };
+            barBtn.setOnAction(getButtonLink);
             bookmarkbar.getButtons().addAll(barBtn);
+            //mouse eventin määritys hiiren oikean painikkeen klikkaukselle.
+            barBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    MouseButton button = mouseEvent.getButton();
+                    if (button==MouseButton.SECONDARY)
+                    {
+                        //String btnId= barBtn.getId();
+                        String url = barBtn.getText();
+                        System.out.println(url);
+                        bookmarkbar.getButtons().remove((barBtn));
+                        try {
+                            //kutsutaan poistometodia, parametrina poistettavan urlin teksti
+                            DeleteFromBookmarkBar(url);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
         }
 
 
+
+    }
+
+    public void DeleteFromBookmarkBar(String finaUrl) throws SQLException {
+        DBconnection conn = new DBconnection();
+        Connection connDB = conn.getConnection();
+        String DBquery = " DELETE FROM Bookmarkbar WHERE (address) = (?)";
+        PreparedStatement pst = connDB.prepareStatement(DBquery);
+        pst.setString(1, finaUrl);
+        pst.execute();
     }
     public void ShowBookmarks(Menu bookmarks, WebView webView) throws SQLException {
         DBconnection conn = new DBconnection();

@@ -15,6 +15,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class BrowserController {
     public CheckBox switchTxt, startPageCB,disablejs;
 
     @FXML
-    public Button debugBtn,findBtn;
+    public Button debugBtn,findBtn,undoBtn;
 
     @FXML
     public ImageView sourceImg;
@@ -76,6 +77,8 @@ public class BrowserController {
     WebEngine webEngine = new WebEngine();
     WebHistory history = webEngine.getHistory();
     Helpers helpers = new Helpers();
+
+    TextMethods tm = new TextMethods();
 
 
 
@@ -104,11 +107,12 @@ public class BrowserController {
             webView.setFontScale((Double) newValue);
 
         });
+
         getSavedStartPage();
         helpers.runConnCheck(connShape);
 
         bom.ShowBookmarks(bookmarks, webView);
-        bom.showBookmarkBarLinks(bookmarkbar);
+        bom.showBookmarkBarLinks(bookmarkbar,webView);
 
         StyleConfiguration();
 
@@ -167,11 +171,11 @@ public class BrowserController {
     }
 
     public void PlusZoom(ActionEvent actionEvent) {
-        zoom.IncreaseZoom(webView);
+        zoom.IncreaseZoom(webView,switchTxt,txtView);
     }
 
     public void MinusZoom(ActionEvent actionEvent) {
-        zoom.DecreaseZoom(webView);
+        zoom.DecreaseZoom(webView,switchTxt,txtView);
     }
 
 
@@ -214,15 +218,17 @@ public class BrowserController {
         if (switchTxt.isSelected()) {
             webView.setOpacity(0.0);
             txtView.setOpacity(1.0);
+            //undoBtn.setOpacity(1.0);
 
-            //muutetaan teksilaatikon korkeutta,
-            txtView.setMinHeight(200);
+            //muutetaan teksilaatikon minimi korkeutta,
+            txtView.setMinHeight(350);
 
 
         } else {
             webView.setOpacity(1.0);
             txtView.setOpacity(0.0);
             searchField.setOpacity(0.0);
+            undoBtn.setOpacity(0.0);
 
         }
 
@@ -344,6 +350,15 @@ public class BrowserController {
     public void turnHelpersOn(ActionEvent event) {
         helpersOn=true;
         helpers.UrlChecker(addField,helperLbl,helpersOn);
+    }
+
+    public void boldText(ActionEvent event) {
+        tm.DoBolding(txtView);
+    }
+
+
+    public void undoLatest(ActionEvent event) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+        tm.cancelLatestMethod(txtView);
     }
 }
 

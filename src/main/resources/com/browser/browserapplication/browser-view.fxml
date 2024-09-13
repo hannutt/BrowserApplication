@@ -30,8 +30,8 @@
         <items>
           <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="495.0" style="-fx-border-radius: 20;">
                <children>
-                  <TextField fx:id="addField" layoutX="83.0" layoutY="66.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" prefHeight="25.0" prefWidth="411.0" style="-fx-border-radius: 20;" />
-                  <Button fx:id="nextBtn" layoutX="505.0" layoutY="67.0" mnemonicParsing="false" onAction="#goNextPage">
+                  <TextField fx:id="addField" layoutX="83.0" layoutY="79.0" maxWidth="-Infinity" onKeyPressed="#goPageEnter" prefHeight="25.0" prefWidth="411.0" style="-fx-border-radius: 20;" />
+                  <Button fx:id="nextBtn" layoutX="505.0" layoutY="79.0" mnemonicParsing="false" onAction="#goNextPage">
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -40,7 +40,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="preBtn" layoutX="40.0" layoutY="66.0" mnemonicParsing="false" onAction="#goPreviousPage" prefHeight="25.0" prefWidth="23.0">
+                  <Button fx:id="preBtn" layoutX="40.0" layoutY="78.0" mnemonicParsing="false" onAction="#goPreviousPage" prefHeight="25.0" prefWidth="23.0">
                      <graphic>
                         <ImageView fitHeight="73.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -85,6 +85,11 @@
                         </items>
                       </Menu>
                       <Menu fx:id="bookmarks" mnemonicParsing="false" text="Bookmarks" />
+                        <Menu mnemonicParsing="false" text="Text options">
+                          <items>
+                            <MenuItem fx:id="boldMI" mnemonicParsing="false" onAction="#boldText" text="Bold text" />
+                          </items>
+                        </Menu>
                     </menus>
                      <effect>
                         <SepiaTone />
@@ -104,7 +109,7 @@
                      </image>
                   </ImageView>
                   <Slider fx:id="slider" layoutX="570.0" layoutY="165.0" orientation="VERTICAL" />
-                  <Button layoutX="40.0" layoutY="101.0" mnemonicParsing="false" onAction="#resetScale">
+                  <Button layoutX="40.0" layoutY="152.0" mnemonicParsing="false" onAction="#resetScale">
                      <graphic>
                         <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -113,7 +118,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextArea fx:id="txtView" layoutX="15.0" layoutY="165.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="541.0" />
+                  <TextArea fx:id="txtView" layoutX="14.0" layoutY="192.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="43.0" prefWidth="541.0" />
                   <Button fx:id="debugBtn" layoutX="476.0" layoutY="116.0" mnemonicParsing="false" onAction="#debugger">
                      <graphic>
                         <ImageView fx:id="sourceImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -126,11 +131,12 @@
                   <CheckBox fx:id="disablejs" layoutX="100.0" layoutY="165.0" mnemonicParsing="false" onAction="#disableJS" text="Disable JS" />
                   <TextField fx:id="searchField" layoutX="319.0" layoutY="105.0" opacity="0.0" />
                   <Button fx:id="findBtn" layoutX="520.0" layoutY="66.0" mnemonicParsing="false" onAction="#findText" opacity="0.0" text="Find" />
-                  <ProgressBar fx:id="loadingBar" layoutX="156.0" layoutY="96.0" prefWidth="200.0" progress="0.0" />
+                  <ProgressBar fx:id="loadingBar" layoutX="156.0" layoutY="118.0" prefWidth="200.0" progress="0.0" />
                   <Label fx:id="connLbl" layoutX="483.0" layoutY="576.0" text="CONNECTION" />
                   <Circle fx:id="connShape" fill="#ff1f1f" layoutX="570.0" layoutY="585.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
                   <ButtonBar fx:id="bookmarkbar" layoutX="83.0" layoutY="41.0" prefHeight="25.0" prefWidth="190.0" />
-                  <Label fx:id="helperLbl" layoutX="152.0" layoutY="122.0" prefHeight="17.0" prefWidth="190.0" />
+                  <Label fx:id="helperLbl" layoutX="147.0" layoutY="138.0" prefHeight="17.0" prefWidth="190.0" />
+                  <Button fx:id="undoBtn" layoutX="383.0" layoutY="118.0" mnemonicParsing="false" onAction="#undoLatest" opacity="0.0" text="Undo" />
                </children>
             </AnchorPane>
         </items>
