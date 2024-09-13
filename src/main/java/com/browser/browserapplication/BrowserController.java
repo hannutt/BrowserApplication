@@ -80,6 +80,8 @@ public class BrowserController {
 
     TextMethods tm = new TextMethods();
 
+    RssFeeds rf = new RssFeeds();
+
 
 
 
@@ -359,6 +361,11 @@ public class BrowserController {
 
     public void undoLatest(ActionEvent event) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         tm.cancelLatestMethod(txtView);
+    }
+
+    public void readRss(ActionEvent event) throws IOException {
+
+        rf.showRSS(webView,txtView,loadingBar);
     }
 }
 

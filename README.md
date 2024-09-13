@@ -17,6 +17,15 @@ Overview when the user has selected debug mode. This mode shows the html structu
 
 ![debugUI.png](debugUI.png)
 
+Example picture of retrieving an rss feed and printing it to the TextArea component. The RSS feed is 
+retrieved using the BufferReader and InputStreamReader classes. The user can enter the address from
+which the feed is retrieved. RSS tags are removed from the displayed result using the replace method.
+The sample feed for the image was retrieved from: https://feeds.kauppalehti.fi/rss/main
+
+![rssResult.png](rssResult.png)
+
+
+
 
 
 
