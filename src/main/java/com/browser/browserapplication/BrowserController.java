@@ -366,6 +366,7 @@ public class BrowserController {
     public void readRss(ActionEvent event) throws IOException {
 
         rf.showRSS(webView,txtView,loadingBar);
+
     }
 }
 

@@ -94,14 +94,20 @@ public void checkIsFullyLoaded(WebView webView, ProgressBar loadingBar) {
 
                         //succeeded tarkoittaa sivun latautuneen.
                         if( newValue != Worker.State.SUCCEEDED ) {
+                            //kun lataus vielä kesken, edistymispalkki täyttyy puoleen väliin.
+                            loadingBar.setProgress(0.5);
 
                             return;
                     }
 
-
                         loadingBar.setProgress(1.0);
+
+
                 }
+
+
             } );
+
 
 
 }

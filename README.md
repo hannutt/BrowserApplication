@@ -1,10 +1,12 @@
 Project keywords: Java, Lynx clone, webbrowser clone, WebView,MySQL
 
 This program emulates two types of programs, a modern web browser and a Lynx-style browser that only displays
-the text of the web page the user is looking for.
+the text of the web page the user is looking for. as an additional feature, in addition to these, there is an RSS feed searcher and
+parser.
 
 overview of the browser interface. the user has typed the address yahoo.com into the address field of the browser and the webView component displays the desired page
 The bookmark bar is above the address field and other functions can be found in the buttons and drop-down menus
+
 ![browserUI.png](browserUI.png)
 
 
@@ -23,11 +25,6 @@ which the feed is retrieved. RSS tags are removed from the displayed result usin
 The sample feed for the image was retrieved from: https://feeds.kauppalehti.fi/rss/main
 
 ![rssResult.png](rssResult.png)
-
-
-
-
-
 
 
 MAIN FEATURES
@@ -118,7 +115,11 @@ The addresses stored in the bookmark bar are displayed inside the button bar ele
 a while loop. the bookmark bar address button can be removed from the user interface and database by right-clicking. 
 An event handler is set for the buttons, which recognizes the right mouse button press and calls the delete method.
 
+RSS Feed
 
+Rss feeds are retrieved from the address entered by the user using the BufferReader and InputStreamReader properties.
+then the most common rss tags like <category>, <pubDate>, <item> etc. are removed from the result using the for loop and
+replace method. The end result of these functions is that the user gets tag-free text to read.
 
 SET THE HOMEPAGE
 

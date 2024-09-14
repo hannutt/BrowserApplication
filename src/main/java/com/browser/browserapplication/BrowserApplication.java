@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 
 public class BrowserApplication extends Application {
+    public WebView webView;
 
 
     @Override
@@ -25,6 +27,8 @@ public class BrowserApplication extends Application {
         stage.setTitle("Browser");
         stage.setScene(scene);
         stage.show();
+        
+
 
 
     }
