@@ -12,11 +12,12 @@ import java.util.Objects;
 
 public class Zoom {
 
-
-
     public void IncreaseZoom(WebView webView, CheckBox switchTxt, TextArea txtView) {
-
-        if (switchTxt.isSelected()) {
+        //haetaan RssFeed luokan Rss booleann arvo.
+        boolean rss = RssFeeds.setRssTrue();
+        System.out.println(rss);
+        //jos checkbox on valittu tai rss on true
+        if (switchTxt.isSelected() || rss) {
             //nykyisen fontttikoo tallennus muuttujaan
             double currentFontSize = txtView.getFont().getSize();
             //fonttikoon kasvatus 1.0 / klikkaus ja kasvatetun fonttikoon
@@ -35,7 +36,8 @@ public class Zoom {
     }
 
     public void DecreaseZoom(WebView webView, CheckBox switchTxt, TextArea txtView) {
-        if (switchTxt.isSelected())
+        boolean rss = RssFeeds.setRssTrue();
+        if (switchTxt.isSelected()|| rss)
         {
             double currentFontSize = txtView.getFont().getSize();
             currentFontSize-=1.0;

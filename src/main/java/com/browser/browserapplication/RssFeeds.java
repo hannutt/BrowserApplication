@@ -13,6 +13,14 @@ import java.util.Optional;
 
 public class RssFeeds {
 
+    public static boolean rss=false;
+
+    //tämä palauttaa rss arvon, kun se muuttuu tai ei muutu
+    public static boolean setRssTrue() {
+
+        return rss;
+
+    }
 
     public void showRSS(WebView webView, TextArea txtView, ProgressBar loadingBar) throws IOException {
         TextInputDialog td = new TextInputDialog();
@@ -22,8 +30,12 @@ public class RssFeeds {
         String res = String.valueOf(result);
 
 
+
+
         if (result.isPresent()) {
             try {
+                rss=true;
+
                 System.out.println(res);
                 webView.setOpacity(0.0);
                 txtView.setOpacity(1.0);

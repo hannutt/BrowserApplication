@@ -29,6 +29,7 @@ public class BrowserController {
     BrowserMethods bm = new BrowserMethods();
 
 
+
     @FXML
     public AnchorPane anchorPane;
     @FXML
@@ -149,7 +150,6 @@ public class BrowserController {
             if (txtFIll != null) {
                 themes.setCBtextColor(startPageCB, switchTxt, txtFIll);
                 System.out.println(txtFIll);
-
             }
 
 
@@ -189,9 +189,7 @@ public class BrowserController {
             goPage(null);
         }
 
-
     }
-
 
     public void setDarkTheme(ActionEvent actionEvent) throws IOException {
         themes.useDarkTheme(anchorPane);
@@ -205,7 +203,6 @@ public class BrowserController {
     }
 
     public void goPreviousPage(ActionEvent actionEvent) {
-
         bm.executePrevious(addreslist, webView);
 
     }
@@ -236,13 +233,10 @@ public class BrowserController {
 
     }
 
-
     public void customTheme(KeyEvent keyEvent) throws IOException {
         themes.setCustomTheme(keyEvent, colCode, anchorPane);
 
-
     }
-
 
     public void saveStartPage(ActionEvent actionEvent) throws SQLException {
         if (startPageCB.isSelected()) {
@@ -272,11 +266,8 @@ public class BrowserController {
                 pst.executeUpdate();
 
             }
-
         }
-
     }
-
     public void getSavedStartPage() throws SQLException {
 
         try {
@@ -323,8 +314,6 @@ public class BrowserController {
         clicks+=1;
         bm.htmlStructure(webEngine,txtView,webView,addField,clicks,debugBtn,sourceImg,searchField,findBtn);
 
-
-
     }
     public void disableJS(ActionEvent event) {
         if(disablejs.isSelected())
@@ -336,8 +325,6 @@ public class BrowserController {
             webView.getEngine().setJavaScriptEnabled(true);
 
         }
-
-
     }
 
     public void findText(ActionEvent event) {
