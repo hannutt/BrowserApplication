@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 public class BrowserApplication extends Application {
-    public WebView webView;
+
 
 
     @Override

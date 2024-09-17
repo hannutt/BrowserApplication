@@ -118,8 +118,11 @@ An event handler is set for the buttons, which recognizes the right mouse button
 RSS Feed
 
 Rss feeds are retrieved from the address entered by the user using the BufferReader and InputStreamReader properties.
-then the most common rss tags like <category>, <pubDate>, <item> etc. are removed from the result using the for loop and
+then the most common rss tags like category, pubDate, item etc. are removed from the result using the for loop and
 replace method. The end result of these functions is that the user gets tag-free text to read.
+
+Entering an RSS feed address works both with and without the https:// suffix. The program checks with the include
+method whether the user's input has a suffix or not. if not, the program automatically adds an https:// attachment.
 
 SET THE HOMEPAGE
 

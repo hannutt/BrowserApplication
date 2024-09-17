@@ -319,7 +319,6 @@ public class BrowserController {
         if(disablejs.isSelected())
         {
             webView.getEngine().setJavaScriptEnabled(false);
-
         }
         else{
             webView.getEngine().setJavaScriptEnabled(true);
